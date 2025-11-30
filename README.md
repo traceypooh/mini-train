@@ -53,7 +53,7 @@ cd /openface
 git clone https://github.com/torch/distro.git torch --recursive
 cd torch  &&  bash install-deps  &&  cd -
 
-# resolve libpng issues -- needs libpng16! -- fixes
+# resolve libpng issues -- needs libpng16 -- fixes
 BAD=/usr/lib/x86_64-linux-gnu/libpng.so
 GOOD=/usr/local/lib/libpng.so
 ls -l ${BAD?} ${GOOD?}
@@ -69,7 +69,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 perl -i -pe "s=${BAD?}=${GOOD?}="  $(grep -r ${BAD?} . |cut -f1 -d: |sort -u)
 ./install.sh
 . /openface/torch/install/bin/torch-activate
-# 'th' should work now!
+# 'th' should work now
 for i in dpnn nn optim csvigo; do  luarocks  install  $i; done
 
 
@@ -100,7 +100,7 @@ index 8d67d09..b668e3b 100755
 EOF
 
 
-# this should now work!
+# this should now work
 cd /openface  &&  . /openface/torch/install/bin/torch-activate  &&   /openface/openface/demos/classifier.py infer /home/tracey/d/mini-train/__features/classifier.pkl  /home/tracey/d/mini-train/jason-scott/JasonScott.jpg
 ```
 
@@ -108,7 +108,7 @@ cd /openface  &&  . /openface/torch/install/bin/torch-activate  &&   /openface/o
 ###################################################################################################
 # Ideas / Tips / Possible future research
 
-### 24bit PNG 4-channel alpha (!!)
+### 24bit PNG 4-channel alpha (!)
 convert a.png -channel A -alpha background png24:a_png24_alpha.png
 
 ### imagemagick simpleton compare MAE
@@ -122,7 +122,7 @@ compare -verbose -metric MAE p1 p2 null:
 - https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/ios/
 - https://developer.apple.com/documentation/arkit/creating_face_based_ar_experiences
 - https://github.com/aleph7/AIImageCompare
-# FLOWER RETRAINER -- RIK (from jwplayer) IDEA!
+# FLOWER RETRAINER -- RIK (from jwplayer) IDEA
 https://www.tensorflow.org/tutorials/image_retraining
 
 
@@ -190,9 +190,9 @@ batch-represent/main.lua -data t/__aligned -outDir t/__features
 demos/classifier.py train t/__features
 
 
-# IDENTIFY -- (with 20+ statues _not_ in mix, got) 13 of 13 right!!!
+# IDENTIFY -- (with 20+ statues _not_ in mix, got) 13 of 13 right.
 # later got 10 and 11 of 13 right (wrong: aaron/jim/ted; aaron/jim)
-# LATER got 13 of 13 right!!
+# LATER got 13 of 13 right.
 demos/classifier.py --verbose infer t/__features/*pkl t/__test/*.*
 ```
 
@@ -246,7 +246,7 @@ for i in $(ls *JPG|mirror|cut -f2- -d.|mirror);do convert $i.JPG -auto-orient -r
 
 
 ###################################################################################################
-# phash (better than imagehash -- but cImg based non-iOS was better!)
+# phash (better than imagehash -- but cImg based non-iOS was better)
 ```bash
 cd /Users/tracey/d/mini-train/pix/small;  f1=BrewsterKahle.png;        for f in *png; do ~/dev/phash/wtf $f1 $f; done |sort -nr
 cd /Users/tracey/d/mini-train/pix/masked; f1=../BrewsterKahle-xxx.jpg; for f in *png; do ~/dev/phash/wtf $f1 $f; done |sort -nr
